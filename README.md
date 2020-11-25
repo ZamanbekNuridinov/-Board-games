@@ -1,0 +1,2 @@
+# -Board-games
+Сhess, checkers
