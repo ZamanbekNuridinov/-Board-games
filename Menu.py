@@ -5779,29 +5779,10 @@ def Chess960():
                 if gs.map[i][j]=="M":
                     display.blit(move,(j*x+22+margin_left+24,i*x+22+margin_top+24))
                 if (gs.map[i][j]=="G" or gs.map[i][j]=="g"):
-                    if gs.map[i][j]=="G":
-                        for k in range(len(gs.map)):
-                            for m in range(len(gs.map[k])):
-                                if gs.map[k][m]=="g":
-                                    Check-=1
-                                else:
-                                    Check+=1
-            
-                    elif gs.map[i][j]=="g":
-                        for k in range(len(gs.map)):
-                            for m in range(len(gs.map[k])):
-                                if gs.map[k][m]=="G":
-                                    Check2-=1
-                                else:
-                                    Check2+=1
-                if Check==81:
-                    Win()
-                else:
-                    Check=0
-                if Check2==81:
-                    Win()
-                else:
-                    Check2=0
+                    check+=1
+        if check%2==1:
+            Win()
+        keys = pygame.key.get_pressed()
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_ESCAPE]:
