@@ -5371,7 +5371,6 @@ def Chess():
     margin_left=160
     margin_top=50
     check=0
-    Check2=0
 
     while not done:
         display.blit(ingame, (0, 0))
@@ -5609,8 +5608,7 @@ def Chess960():
     display.fill((211,211,211))
     margin_left=160
     margin_top=50
-    Check=0
-    Check2=0
+    check=0
 
     while not done:
         display.blit(ingame, (0, 0))
