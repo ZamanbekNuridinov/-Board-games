@@ -164,13 +164,21 @@ def Select():
                 pygame.quit()
                 quit()
         display.blit(menu_background2, (-215, -180))
-        Ugolki_btn.draw2(485, 100+30, 'Ugolki 4x3', Ugolkki1, 50)
-        Ugolki2_btn.draw2(485, 190+30, 'Ugolki 3x3', Ugolkki2, 50)
-        Checkers_btn.draw2(510, 350+30, 'Checkers', Checkers ,50)
-        Chess2_btn.draw2(495, 270+30, 'Chess 960', Chess960, 50)
-        Chess_btn.draw2(550, 430+30, 'Chess', Chess, 50)
+        Ugolki_btn.draw2(485, 380, 'Ugolki 4x3', Ugolkki1, 50)
+        Ugolki2_btn.draw2(485, 460, 'Ugolki 3x3', Ugolkki2, 50)
+        Checkers_btn.draw2(510, 220, 'Checkers', Checkers ,50)
+        Chess2_btn.draw2(495, 300, 'Chess 960', Chess960, 50)
+        Chess_btn.draw2(550, 130, 'Chess', Chess, 50)
         back_btn.draw2(565, 510+30, 'Back', show_menu, 50)
         quit_btn.draw2(565, 590+30, 'Quit', quit, 50)
+
+        # Ugolki_btn.draw2(485, 100+30, 'Ugolki 4x3', Ugolkki1, 50)
+        # Ugolki2_btn.draw2(485, 190+30, 'Ugolki 3x3', Ugolkki2, 50)
+        # Checkers_btn.draw2(510, 350+30, 'Checkers', Checkers ,50)
+        # Chess2_btn.draw2(495, 270+30, 'Chess 960', Chess960, 50)
+        # Chess_btn.draw2(550, 430+30, 'Chess', Chess, 50)
+        # back_btn.draw2(565, 510+30, 'Back', show_menu, 50)
+        # quit_btn.draw2(565, 590+30, 'Quit', quit, 50)
 
         pygame.display.update()
         clock.tick(80)
@@ -5362,7 +5370,7 @@ def Chess():
     display.fill((211,211,211))
     margin_left=160
     margin_top=50
-    Check=0
+    check=0
     Check2=0
 
     while not done:
@@ -5532,29 +5540,9 @@ def Chess():
                 if gs.map[i][j]=="M":
                     display.blit(move,(j*x+22+margin_left+24,i*x+22+margin_top+24))
                 if (gs.map[i][j]=="G" or gs.map[i][j]=="g"):
-                    if gs.map[i][j]=="G":
-                        for k in range(len(gs.map)):
-                            for m in range(len(gs.map[k])):
-                                if gs.map[k][m]=="g":
-                                    Check-=1
-                                else:
-                                    Check+=1
-            
-                    elif gs.map[i][j]=="g":
-                        for k in range(len(gs.map)):
-                            for m in range(len(gs.map[k])):
-                                if gs.map[k][m]=="G":
-                                    Check2-=1
-                                else:
-                                    Check2+=1
-                if Check==81:
-                    Win()
-                else:
-                    Check=0
-                if Check2==81:
-                    Win()
-                else:
-                    Check2=0
+                    check+=1
+        if check%2==1:
+            Win()
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_ESCAPE]:

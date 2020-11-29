@@ -168,9 +168,10 @@ while not done:
                 screen.blit(pawn_w,(j*x+margin_left+24,i*x+margin_top+24))
             if gs.map[i][j]=="M":
                 screen.blit(move,(j*x+22+margin_left+24,i*x+22+margin_top+24))
-            # if (gs.map[i][j]=="G" or gs.map[i][j]=="g") and i<:
-            #     check+=1
-   
+            if (gs.map[i][j]=="G" or gs.map[i][j]=="g"):
+                check+=1
+if check%2==1:
+    print("Yes")  
     pygame.display.flip()
     clock.tick(fps)
 pygame.quit()
