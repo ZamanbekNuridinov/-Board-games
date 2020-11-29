@@ -1,6 +1,7 @@
 import pygame
 import chessEngine
-import chessEngine1
+from random import randint, uniform, choice
+import math
 
 pygame.init()
 
@@ -21,7 +22,7 @@ pygame.display.set_icon(icon)
 step_sound = pygame.mixer.Sound('chess.wav')
 step_sound2 = pygame.mixer.Sound('chess2.wav')
 
-bord = pygame.image.load('board4h.png')
+bord = pygame.image.load('board2.png')
 bord= pygame.transform.scale(bord, (570,570))
 nikandreos = pygame.image.load('nikandreos.png')
 nikandreos= pygame.transform.scale(nikandreos, (400,200))
@@ -114,10 +115,11 @@ clock = pygame.time.Clock()
 
 
 
+
+
 def show_menu():
 
     menu_background2 = pygame.image.load('Menu2.jpg')
-    pygame.mixer.music.load('background1.mp3')
     pygame.mixer.music.play(-1)
 
     show = True
@@ -141,8 +143,7 @@ def show_menu():
         clock.tick(80)
         
 def Select():
-    pygame.mixer.music.load('background1.mp3')
-    pygame.mixer.music.play(-1)
+    
 
     menu_background2 = pygame.image.load('screen1.jpg')
     
@@ -154,7 +155,6 @@ def Select():
     Ugolki2_btn = Button(288, 70)
     Checkers_btn = Button(240, 70)
     Chess_btn = Button(160, 70)
-    Chess2_btn = Button(280, 70)
     back_btn = Button(130, 70)
     quit_btn = Button(130, 70)
 
@@ -164,13 +164,12 @@ def Select():
                 pygame.quit()
                 quit()
         display.blit(menu_background2, (-215, -180))
-        Ugolki_btn.draw2(485, 100+30, 'Ugolki 4x3', Ugolkki1, 50)
-        Ugolki2_btn.draw2(485, 190+30, 'Ugolki 3x3', Ugolkki2, 50)
-        Checkers_btn.draw2(510, 350+30, 'Checkers', Checkers ,50)
-        Chess2_btn.draw2(495, 270+30, 'Chess 960', Chess960, 50)
-        Chess_btn.draw2(550, 430+30, 'Chess', Chess, 50)
-        back_btn.draw2(565, 510+30, 'Back', show_menu, 50)
-        quit_btn.draw2(565, 590+30, 'Quit', quit, 50)
+        Ugolki_btn.draw2(485, 170, 'Ugolki 4x3', Ugolkki1, 50)
+        Ugolki2_btn.draw2(485, 250, 'Ugolki 3x3', Ugolkki2, 50)
+        Checkers_btn.draw2(510, 330, 'Checkers', Checkers ,50)
+        Chess_btn.draw2(550, 410, 'Chess', Chess, 50)
+        back_btn.draw2(565, 490, 'Back', show_menu, 50)
+        quit_btn.draw2(565, 570, 'Quit', quit, 50)
 
         pygame.display.update()
         clock.tick(80)
@@ -183,7 +182,10 @@ def Creators():
     menu_background3 = pygame.image.load('ingame3.jpg')
     
                 #height     #width
-    text_btn = Button(0, 0)
+    God_btn = Button(555, 70)
+    Kadr_btn = Button(255, 70)
+    Zama_btn = Button(250, 70)
+    Alta_btn = Button(170, 70)
     BACK_btn = Button(130, 70)
     
 
@@ -193,47 +195,16 @@ def Creators():
                 pygame.quit()
                 quit()
         display.blit(menu_background3, (-450, -180))
-        text_btn.draw2(360, 170, 'Was created by 3 gods', None, 50)
-        text_btn.draw2(495, 250, 'Zamanbek', None, 50)
-        text_btn.draw2(540, 330, 'Altair', None, 50)
-        text_btn.draw2(495, 410, 'Kadyrgali', None ,50)
+        God_btn.draw2(360, 170, 'Was created by 3 gods', None, 50)
+        Zama_btn.draw2(495, 250, 'Zamanbek', None, 50)
+        Alta_btn.draw2(540, 330, 'Altair', None, 50)
+        Kadr_btn.draw2(495, 410, 'Kadyrgali', None ,50)
         BACK_btn.draw2(565, 490, 'BACK', show_menu, 50)
         
 
         pygame.display.update()
         clock.tick(80)
 
-def Win():
-    step_sound4 = pygame.mixer.music.load('WIN.mp3')
-    pygame.mixer.music.play(1)
-
-    menu_background3 = pygame.image.load('winimg.png')
-    
-
-    Win = True
-
-                #height     #width
-  
-    text_btn = Button(0, 0)
-    menu_btn= Button(155, 70)
-    select_btn = Button(170, 70)
-    quit_btn = Button(130, 70)
-
-    while Win:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-        display.blit(menu_background3, (-215, -180))
-        text_btn.draw(450, 170, 'Congratulations', None, 50)
-        text_btn.draw(360, 250, 'you received a blessing', None ,50)
-        text_btn.draw(450, 330, 'from three gods', None, 50)
-        select_btn.draw(570, 410, 'Select', Select, 50)
-        menu_btn.draw(575, 490, 'MENU', show_menu, 50)
-        quit_btn.draw(585, 570, 'Quit', quit, 50)
-
-        pygame.display.update()
-        clock.tick(80)
 
 def Ugolkki1():
     game = True
@@ -267,6 +238,8 @@ def Ugolkki1():
    
     BBB = [[0,0,0],[1,0,0],[2,0,0],[3,0,0],[0,1,0],[1,1,0],[2,1,0],[3,1,0],[0,2,0],[1,2,0],[2,2,0],[3,2,0]]
     RRR = [[4,5,0],[5,5,0],[6,5,0],[7,5,0],[4,6,0],[5,6,0],[6,6,0],[7,6,0],[4,7,0],[5,7,0],[6,7,0],[7,7,0]]
+    RRR = [[0,0,0],[1,0,0],[2,0,0],[3,0,0],[0,1,0],[1,1,0],[2,1,0],[3,1,0],[0,2,0],[1,2,0],[2,2,0],[3,2,0]]
+
     ENDBBB = [[4,5],[5,5],[6,5],[7,5],[4,6],[5,6],[6,6],[7,6],[4,7],[5,7],[6,7],[7,7]]
     ENDRRR = [[0,0],[1,0],[2,0],[3,0],[0,1],[1,1],[2,1],[3,1],[0,2],[1,2],[2,2],[3,2]]
 
@@ -350,7 +323,7 @@ def Ugolkki1():
     # doska = pygame.image.load('board.png')
     # doska = pygame.transform.scale(doska, (512, 512))
 
-    ingame = pygame.image.load('ingame2l.png')
+    ingame = pygame.image.load('ingame2.jpg')
     ingame = pygame.transform.scale(ingame, (1280, 800))
     start_btn = Button(83, 40)
 
@@ -358,8 +331,6 @@ def Ugolkki1():
     rules_btn = Button(100, 40)
     back_btn = Button(70, 40)
     quit_btn = Button(70, 40)
-    Music_btn = Button(110, 40)
-    Music2_btn = Button(110, 40)
  
 
     while not done:
@@ -1541,22 +1512,23 @@ def Ugolkki1():
                     RWIN+=1
             if BWIN==12:
                 #print("1 Player win")
+                step_sound3 = pygame.mixer.music.load('loss.mp3')
+                pygame.mixer.music.play(1)
                 WWIN=1
-                Win()
             
             else:
                 BWIN=0
             if RWIN==12:
                 #print("2 Player win")
+                step_sound3 = pygame.mixer.music.load('loss.mp3')
+                pygame.mixer.music.play(1)
                 WWIN=1
-                Win()
+                main()
             else:
                 RWIN=0
         display.blit(ingame, (0, 0))
         start_btn.draw(95, 90, 'Select', Select, 20)
         back_btn.draw(100, 140, 'Menu', show_menu, 20)
-        Music_btn.draw(xDistanceFromEdge*4+130, yDistanceFromEdge*4-66, 'Music off', Music2, 20)
-        Music2_btn.draw(xDistanceFromEdge*4-80, yDistanceFromEdge*4-66, 'Music on', Music, 20)
         quit_btn.draw(100, 190, 'Quit', quit, 20)
         header = pygame.image.load('header-title1.png')
         header= pygame.transform.scale(header, (400,200))
@@ -1712,7 +1684,7 @@ def Ugolkki2():
     # doska = pygame.image.load('board.png')
     # doska = pygame.transform.scale(doska, (512, 512))
 
-    ingame = pygame.image.load('ingame2l.png')
+    ingame = pygame.image.load('ingame2.jpg')
     ingame = pygame.transform.scale(ingame, (1280, 800))
     start_btn = Button(83, 40)
     back_btn = Button(70, 40)
@@ -2898,15 +2870,17 @@ def Ugolkki2():
                     RWIN+=1
             if BWIN==12:
                 #print("1 Player win")
+                step_sound3 = pygame.mixer.music.load('loss.mp3')
+                pygame.mixer.music.play(1)
                 WWIN=1
-                Win()
             
             else:
                 BWIN=0
             if RWIN==12:
                 #print("2 Player win")
+                step_sound3 = pygame.mixer.music.load('loss.mp3')
+                pygame.mixer.music.play(1)
                 WWIN=1
-                Win()
             else:
                 RWIN=0
         display.blit(ingame, (0, 0))
@@ -2916,10 +2890,6 @@ def Ugolkki2():
         header = pygame.image.load('header-title1.png')
         header= pygame.transform.scale(header, (400,200))
         display.blit(header, (xDistanceFromEdge*3+80, yDistanceFromEdge-70))
-        Music_btn = Button(110, 40)
-        Music2_btn = Button(110, 40)
-        Music_btn.draw(xDistanceFromEdge*4+130, yDistanceFromEdge*4-66, 'Music off', Music2, 20)
-        Music2_btn.draw(xDistanceFromEdge*4-80, yDistanceFromEdge*4-66, 'Music on', Music, 20)
         if player1==True:
             print_text('player2 turn', xDistanceFromEdge*3+210, yDistanceFromEdge+70)
         elif player2==True:
@@ -3074,10 +3044,10 @@ def Checkers():
 
     # -------- Main Program Loop -----------
     start=0
-    WWIN=0
+    eat=0
     player2 = True
     player1 = False
-    ingame = pygame.image.load('ingame2l.png')
+    ingame = pygame.image.load('ingame2.jpg')
     ingame = pygame.transform.scale(ingame, (1280, 800))
     start_btn = Button(83, 40)
     options_btn = Button(100, 40)
@@ -3114,13 +3084,13 @@ def Checkers():
                                 Total[2]=2
                             elif Total[0]==column-1 and Total[1]==row+1 and gameBoard[column-1][row+1]==None and ShaskaB[2]==0:
                                 Total[2]=2
-                            elif Total[0]==column+2 and Total[1]==row+2 and gameBoard[column+2][row+2]==None and (gameBoard[column+1][row+1]=="NormalRed" or gameBoard[column+1][row+1]=="KingRed") and ShaskaB[2]==0:
+                            elif Total[0]==column+2 and Total[1]==row+2 and gameBoard[column+2][row+2]==None and (gameBoard[column+1][row+1]=="NormalRed" or gameBoard[column+1][row]=="KingRed") and ShaskaB[2]==0:
                                 Total[2]=2
-                            elif Total[0]==column-2 and Total[1]==row+2 and gameBoard[column-2][row+2]==None and (gameBoard[column-1][row+1]=="NormalRed" or gameBoard[column-1][row+1]=="KingRed") and ShaskaB[2]==0:
+                            elif Total[0]==column-2 and Total[1]==row+2 and gameBoard[column-2][row+2]==None and (gameBoard[column-1][row+1]=="NormalRed" or gameBoard[column-1][row]=="KingRed") and ShaskaB[2]==0:
                                 Total[2]=2
-                            elif Total[0]==column+2 and Total[1]==row-2 and gameBoard[column+2][row-2]==None and (gameBoard[column+1][row-1]=="NormalRed" or gameBoard[column+1][row+1]=="KingRed") and ShaskaB[2]==0:
+                            elif Total[0]==column+2 and Total[1]==row-2 and gameBoard[column+2][row-2]==None and (gameBoard[column+1][row-1]=="NormalRed" or gameBoard[column][row+1]=="KingRed") and ShaskaB[2]==0:
                                 Total[2]=2
-                            elif Total[0]==column-2 and Total[1]==row-2 and gameBoard[column-2][row-2]==None and (gameBoard[column-1][row-1]=="NormalRed" or gameBoard[column-1][row-1]=="KingRed") and ShaskaB[2]==0:
+                            elif Total[0]==column-2 and Total[1]==row-2 and gameBoard[column-2][row-2]==None and (gameBoard[column-1][row-1]=="NormalRed" or gameBoard[column][row-1]=="KingRed") and ShaskaB[2]==0:
                                 Total[2]=2
                         start=1
                         
@@ -3149,13 +3119,13 @@ def Checkers():
                                 Total[2]=2
                             elif Total[0]==column-1 and Total[1]==row-1 and gameBoard[column-1][row-1]==None and ShaskaB[2]==0:
                                 Total[2]=2
-                            elif Total[0]==column+2 and Total[1]==row+2 and gameBoard[column+2][row+2]==None and (gameBoard[column+1][row+1]=="NormalBlack" or gameBoard[column+1][row+1]=="KingBlack") and ShaskaR[2]==0:
+                            elif Total[0]==column+2 and Total[1]==row+2 and gameBoard[column+2][row+2]==None and (gameBoard[column+1][row+1]=="NormalBlack" or gameBoard[column+1][row]=="KingBlack") and ShaskaB[2]==0:
                                 Total[2]=2
-                            elif Total[0]==column-2 and Total[1]==row+2 and gameBoard[column-2][row+2]==None and (gameBoard[column-1][row+1]=="NormalBlack" or gameBoard[column-1][row+1]=="KingBlack") and ShaskaR[2]==0:
+                            elif Total[0]==column-2 and Total[1]==row+2 and gameBoard[column-2][row+2]==None and (gameBoard[column-1][row+1]=="NormalBlack" or gameBoard[column-1][row]=="KingBlack") and ShaskaB[2]==0:
                                 Total[2]=2
-                            elif Total[0]==column+2 and Total[1]==row-2 and gameBoard[column+2][row-2]==None and (gameBoard[column+1][row-1]=="NormalBlack" or gameBoard[column+1][row-1]=="KingBlack") and ShaskaR[2]==0:
+                            elif Total[0]==column+2 and Total[1]==row-2 and gameBoard[column+2][row-2]==None and (gameBoard[column+1][row-1]=="NormalBlack" or gameBoard[column][row+1]=="KingBlack") and ShaskaB[2]==0:
                                 Total[2]=2
-                            elif Total[0]==column-2 and Total[1]==row-2 and gameBoard[column-2][row-2]==None and (gameBoard[column-1][row-1]=="NormalBlack" or gameBoard[column-1][row-1]=="KingBlack") and ShaskaR[2]==0:
+                            elif Total[0]==column-2 and Total[1]==row-2 and gameBoard[column-2][row-2]==None and (gameBoard[column-1][row-1]=="NormalBlack" or gameBoard[column][row-1]=="KingBlack") and ShaskaB[2]==0:
                                 Total[2]=2
                         start=1
                         
@@ -5246,14 +5216,12 @@ def Checkers():
                 if ShaskaR[0]==ShaskaENDR[0] and ShaskaR[1]==ShaskaENDR[1]:
                     ShaskaR[2]=1
                     #print("king")
-        if WWIN==0:
-            if BBB == []:
-                #print("Red wins")
-                WWIN=1
-                Win()
-            if RRR == []:
-                WWIN=1
-                Win()
+        if BBB == []:
+            #print("Red wins")
+            done = True
+        if RRR == []:
+            #print("Black wins")
+            done = True
 
 
 
@@ -5264,10 +5232,6 @@ def Checkers():
         header = pygame.image.load('header-title1.png')
         header= pygame.transform.scale(header, (400,200))
         display.blit(header, (xDistanceFromEdge*3+80, yDistanceFromEdge-70))
-        Music_btn = Button(110, 40)
-        Music2_btn = Button(110, 40)
-        Music_btn.draw(xDistanceFromEdge*4+130, yDistanceFromEdge*4-66, 'Music off', Music2, 20)
-        Music2_btn.draw(xDistanceFromEdge*4-80, yDistanceFromEdge*4-66, 'Music on', Music, 20)
         if player1==True:
             print_text('player2 turn', xDistanceFromEdge*3+210, yDistanceFromEdge+70)
         elif player2==True:
@@ -5313,7 +5277,7 @@ def Chess():
     clock = pygame.time.Clock()
     done = False
 
-    ingame = pygame.image.load('ingame2l.png')
+    ingame = pygame.image.load('ingame2.jpg')
     ingame = pygame.transform.scale(ingame, (1280, 800))
     start_btn = Button(83, 40)
     options_btn = Button(100, 40)
@@ -5323,7 +5287,7 @@ def Chess():
     board_size = 560
     fig_size = 64
     
-    board = pygame.image.load("board4h.png")
+    board = pygame.image.load("board3.png")
     bishop_w = pygame.image.load("img/white_bishop.png")
     rook_w = pygame.image.load("img/white_rook.png")
     king_w = pygame.image.load("img/white_king.png")
@@ -5362,8 +5326,6 @@ def Chess():
     display.fill((211,211,211))
     margin_left=160
     margin_top=50
-    Check=0
-    Check2=0
 
     while not done:
         display.blit(ingame, (0, 0))
@@ -5373,7 +5335,6 @@ def Chess():
         header = pygame.image.load('header-title1.png')
         header= pygame.transform.scale(header, (400,200))
         display.blit(header, (xDistanceFromEdge*3+80, yDistanceFromEdge-70))
-        
         if gs.white_to_move==True:
             print_text('player1 turn', xDistanceFromEdge*3+210, yDistanceFromEdge+70)
         elif gs.white_to_move==False:
@@ -5387,10 +5348,6 @@ def Chess():
         display.blit(apollo, (xDistanceFromEdge*4-300, yDistanceFromEdge*4-55))
 
         display.blit(artemis, (xDistanceFromEdge*4-80, yDistanceFromEdge*4-55))
-        Music_btn = Button(110, 40)
-        Music2_btn = Button(110, 40)
-        Music_btn.draw(xDistanceFromEdge*4+130, yDistanceFromEdge*4-66, 'Music off', Music2, 20)
-        Music2_btn.draw(xDistanceFromEdge*4-80, yDistanceFromEdge*4-66, 'Music on', Music, 20)
         
         
         for event in pygame.event.get():
@@ -5411,6 +5368,7 @@ def Chess():
                     selected = [col,row]
                     playerClicks.append(selected)
                 if len(playerClicks) == 1:
+                
                     if gs.white_to_move == True:
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="P":
                             gs.getPawnWay(playerClicks[0][0],playerClicks[0][1])
@@ -5531,30 +5489,7 @@ def Chess():
                     display.blit(pawn_w,(j*x+margin_left+24,i*x+margin_top+24))
                 if gs.map[i][j]=="M":
                     display.blit(move,(j*x+22+margin_left+24,i*x+22+margin_top+24))
-                if (gs.map[i][j]=="G" or gs.map[i][j]=="g"):
-                    if gs.map[i][j]=="G":
-                        for k in range(len(gs.map)):
-                            for m in range(len(gs.map[k])):
-                                if gs.map[k][m]=="g":
-                                    Check-=1
-                                else:
-                                    Check+=1
-            
-                    elif gs.map[i][j]=="g":
-                        for k in range(len(gs.map)):
-                            for m in range(len(gs.map[k])):
-                                if gs.map[k][m]=="G":
-                                    Check2-=1
-                                else:
-                                    Check2+=1
-                if Check==81:
-                    Win()
-                else:
-                    Check=0
-                if Check2==81:
-                    Win()
-                else:
-                    Check2=0
+
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_ESCAPE]:
@@ -5563,266 +5498,222 @@ def Chess():
         clock.tick(fps)
     pygame.quit()
 
-def Chess960():
-    size = (1280,800)
-    fps = 60
-    xDistanceFromEdge=240
-    yDistanceFromEdge=140
-    display = pygame.display.set_mode(size)
+vector = pygame.math.Vector2
+gravity = vector(0, 0.3)
+DISPLAY_WIDTH = 1200
+DISPLAY_HEIGHT = 800
+
+trail_colours = [(45, 45, 45), (60, 60, 60), (75, 75, 75), (125, 125, 125), (150, 150, 150)]
+dynamic_offset = 1
+static_offset = 5
+
+
+class Firework:
+
+    def __init__(self):
+        self.colour = (randint(0, 255), randint(0, 255), randint(0, 255))
+        self.colours = (
+        (randint(0, 255), randint(0, 255), randint(0, 255)), (randint(0, 255), randint(0, 255), randint(0, 255)),
+        (randint(0, 255), randint(0, 255), randint(0, 255)))
+        self.firework = Particle(randint(0, DISPLAY_WIDTH), DISPLAY_HEIGHT, True,
+                                 self.colour)  # Creates the firework particle
+        self.exploded = False
+        Fly = pygame.mixer.music.load('Fly.wav')
+        pygame.mixer.music.set_volume(1)
+        pygame.mixer.music.play(Fly)
+        self.particles = []
+        self.min_max_particles = vector(100, 225)
+
+    def update(self, win):  # called every frame
+        if not self.exploded:
+            self.firework.apply_force(gravity)
+            self.firework.move()
+            for tf in self.firework.trails:
+                tf.show(win)
+
+            self.show(win)
+
+            if self.firework.vel.y >= 0:
+                self.exploded = True
+                Boom = pygame.mixer.music.load('Boom.wav')
+                pygame.mixer.music.set_volume(1)
+                pygame.mixer.music.play(Boom)
+                self.explode()
+                
+        else:
+            for particle in self.particles:
+                particle.apply_force(vector(gravity.x + uniform(-1, 1) / 20, gravity.y / 2 + (randint(1, 8) / 100)))
+                particle.move()
+                for t in particle.trails:
+                    t.show(win)
+                particle.show(win)
+
+    def explode(self):
+        amount = randint(self.min_max_particles.x, self.min_max_particles.y)
+        for i in range(amount):
+            self.particles.append(Particle(self.firework.pos.x, self.firework.pos.y, False, self.colours))
+
+    def show(self, win):
+        pygame.draw.circle(win, self.colour, (int(self.firework.pos.x), int(self.firework.pos.y)), self.firework.size)
+
+    def remove(self):
+        if self.exploded:
+            for p in self.particles:
+                if p.remove is True:
+                    self.particles.remove(p)
+
+            if len(self.particles) == 0:
+                return True
+            else:
+                return False
+
+
+class Particle:
+
+    def __init__(self, x, y, firework, colour):
+        self.firework = firework
+        self.pos = vector(x, y)
+        self.origin = vector(x, y)
+        self.radius = 20
+        self.remove = False
+        self.explosion_radius = randint(5, 18)
+        self.life = 0
+        self.acc = vector(0, 0)
+        # trail variables
+        self.trails = []  # stores the particles trail objects
+        self.prev_posx = [-10] * 10  # stores the 10 last positions
+        self.prev_posy = [-10] * 10  # stores the 10 last positions
+
+        if self.firework:
+            self.vel = vector(0, -randint(17, 20))
+            self.size = 5
+            self.colour = colour
+            for i in range(5):
+                self.trails.append(Trail(i, self.size, True))
+        else:
+            self.vel = vector(uniform(-1, 1), uniform(-1, 1))
+            self.vel.x *= randint(7, self.explosion_radius + 2)
+            self.vel.y *= randint(7, self.explosion_radius + 2)
+            self.size = randint(2, 4)
+            self.colour = choice(colour)
+            for i in range(5):
+                self.trails.append(Trail(i, self.size, False))
+
+    def apply_force(self, force):
+        self.acc += force
+
+    def move(self):
+        if not self.firework:
+            self.vel.x *= 0.8
+            self.vel.y *= 0.8
+
+        self.vel += self.acc
+        self.pos += self.vel
+        self.acc *= 0
+
+        if self.life == 0 and not self.firework:  # check if particle is outside explosion radius
+            distance = math.sqrt((self.pos.x - self.origin.x) ** 2 + (self.pos.y - self.origin.y) ** 2)
+            if distance > self.explosion_radius:
+                self.remove = True
+
+        self.decay()
+
+        self.trail_update()
+
+        self.life += 1
+
+    def show(self, win):
+        pygame.draw.circle(win, (self.colour[0], self.colour[1], self.colour[2], 0), (int(self.pos.x), int(self.pos.y)),
+                           self.size)
+
+    def decay(self):  # random decay of the particles
+        if 50 > self.life > 10:  # early stage their is a small chance of decay
+            ran = randint(0, 30)
+            if ran == 0:
+                self.remove = True
+        elif self.life > 50:
+            ran = randint(0, 5)
+            if ran == 0:
+                self.remove = True
+
+    def trail_update(self):
+        self.prev_posx.pop()
+        self.prev_posx.insert(0, int(self.pos.x))
+        self.prev_posy.pop()
+        self.prev_posy.insert(0, int(self.pos.y))
+
+        for n, t in enumerate(self.trails):
+            if t.dynamic:
+                t.get_pos(self.prev_posx[n + dynamic_offset], self.prev_posy[n + dynamic_offset])
+            else:
+                t.get_pos(self.prev_posx[n + static_offset], self.prev_posy[n + static_offset])
+
+
+class Trail:
+
+    def __init__(self, n, size, dynamic):
+        self.pos_in_line = n
+        self.pos = vector(-10, -10)
+        self.dynamic = dynamic
+
+        if self.dynamic:
+            self.colour = trail_colours[n]
+            self.size = int(size - n / 2)
+        else:
+            self.colour = (255, 255, 200)
+            self.size = size - 2
+            if self.size < 0:
+                self.size = 0
+
+    def get_pos(self, x, y):
+        self.pos = vector(x, y)
+
+    def show(self, win):
+        pygame.draw.circle(win, self.colour, (int(self.pos.x), int(self.pos.y)), self.size)
+def update(win, fireworks):
+    for fw in fireworks:
+        fw.update(win)
+        if fw.remove():
+            fireworks.remove(fw)
+
+    pygame.display.update()
+
+
+def main():
+    win = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
     clock = pygame.time.Clock()
-    done = False
 
-    ingame = pygame.image.load('ingame2l.png')
-    ingame = pygame.transform.scale(ingame, (1280, 800))
-    start_btn = Button(83, 40)
-    options_btn = Button(100, 40)
-    back_btn = Button(70, 40)
-    quit_btn = Button(70, 40)
+    fireworks = [Firework() for i in range(2)]  # create the first fireworks
+    running = True
 
-    board_size = 560
-    fig_size = 64
-    
-    board = pygame.image.load("board4h.png")
-    bishop_w = pygame.image.load("img/white_bishop.png")
-    rook_w = pygame.image.load("img/white_rook.png")
-    king_w = pygame.image.load("img/white_king.png")
-    queen_w = pygame.image.load("img/white_queen.png")
-    knight_w = pygame.image.load("img/white_knight.png")
-    pawn_w = pygame.image.load("img/white_pawn.png")
-    bishop_b = pygame.image.load("img/black_bishop.png")
-    rook_b = pygame.image.load("img/black_rook.png")
-    king_b = pygame.image.load("img/black_king.png")
-    queen_b = pygame.image.load("img/black_queen.png")
-    knight_b = pygame.image.load("img/black_knight.png")
-    pawn_b = pygame.image.load("img/black_pawn.png")
-    move = pygame.image.load("img/circle.png")
-
-    board = pygame.transform.scale(board, (board_size,board_size))
-    bishop_w = pygame.transform.scale(bishop_w, (fig_size,fig_size))
-    rook_w = pygame.transform.scale(rook_w, (fig_size,fig_size))
-    king_w = pygame.transform.scale(king_w, (fig_size,fig_size))
-    queen_w = pygame.transform.scale(queen_w, (fig_size,fig_size))
-    knight_w = pygame.transform.scale(knight_w, (fig_size,fig_size))
-    pawn_w = pygame.transform.scale(pawn_w, (fig_size,fig_size))
-    bishop_b = pygame.transform.scale(bishop_b, (fig_size,fig_size))
-    rook_b = pygame.transform.scale(rook_b, (fig_size,fig_size))
-    king_b = pygame.transform.scale(king_b, (fig_size,fig_size))
-    queen_b = pygame.transform.scale(queen_b, (fig_size,fig_size))
-    knight_b = pygame.transform.scale(knight_b, (fig_size,fig_size))
-    pawn_b = pygame.transform.scale(pawn_b, (fig_size,fig_size))
-    move = pygame.transform.scale(move, (fig_size-44,fig_size-44))
-
-    x=64
-    move_cnt_w=0
-    move_cnt_b=0
-    gs = chessEngine1.GameState()
-    selected = []
-    playerClicks = []
-    display.fill((211,211,211))
-    margin_left=160
-    margin_top=50
-    Check=0
-    Check2=0
-
-    while not done:
-        display.blit(ingame, (0, 0))
-        start_btn.draw(95, 90, 'Select', Select, 20)
-        back_btn.draw(100, 140, 'Menu', show_menu, 20)
-        quit_btn.draw(100, 190, 'Quit', quit, 20)
-        header = pygame.image.load('header-title1.png')
-        header= pygame.transform.scale(header, (400,200))
-        display.blit(header, (xDistanceFromEdge*3+80, yDistanceFromEdge-70))
-        
-        if gs.white_to_move==True:
-            print_text('player1 turn', xDistanceFromEdge*3+210, yDistanceFromEdge+70)
-        elif gs.white_to_move==False:
-            print_text('player2 turn' , xDistanceFromEdge*3+210, yDistanceFromEdge+70)
-                    
-
-        display.blit(board,(margin_left+x,margin_top+x))
-
-        display.blit(nikandreos, (xDistanceFromEdge-300, yDistanceFromEdge*4-10)) 
-
-        display.blit(apollo, (xDistanceFromEdge*4-300, yDistanceFromEdge*4-55))
-
-        display.blit(artemis, (xDistanceFromEdge*4-80, yDistanceFromEdge*4-55))
-        Music_btn = Button(110, 40)
-        Music2_btn = Button(110, 40)
-        Music_btn.draw(xDistanceFromEdge*4+130, yDistanceFromEdge*4-66, 'Music off', Music2, 20)
-        Music2_btn.draw(xDistanceFromEdge*4-80, yDistanceFromEdge*4-66, 'Music on', Music, 20)
-        
-        
+    while running:
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                done=True
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                x1,y1 = event.pos
-                row = ((x1-margin_left-28)//x)
-                col = ((y1-margin_top-28)//x)
-                if selected == [col,row]:
-                    selected = []
-                    playerClicks = []
-                    for i in range(len(gs.map)):
-                            for j in range(len(gs.map[i])):
-                                if gs.map[i][j]=="M":
-                                    gs.map[i][j]=""
-                else:
-                    selected = [col,row]
-                    playerClicks.append(selected)
-                if len(playerClicks) == 1:
-                    if gs.white_to_move == True:
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="P":
-                            gs.getPawnWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="R":
-                            gs.getRookWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="B":
-                            gs.getBishopWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="Q":
-                            gs.getQueenWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="K":
-                            gs.getKnightWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="G":
-                            gs.getKingWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                    else:
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="p":
-                            gs.getPawnWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="r":
-                            gs.getRookWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="b":
-                            gs.getBishopWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="q":
-                            gs.getQueenWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="k":
-                            gs.getKnightWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="g":
-                            gs.getKingWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
-                if len(playerClicks) == 2:
-                    if gs.map[playerClicks[0][0]][playerClicks[0][1]]!="":
-                        for i in range(len(gs.map)):
-                            for j in range(len(gs.map[i])):
-                                if gs.map[i][j]=="M":
-                                    gs.map[i][j]=""
-                        if gs.white_to_move == True :
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="P":
-                                gs.getPawnMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="R":
-                                move_cnt_w+=1
-                                gs.getRookMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="B":
-                                gs.getBishopMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="Q":
-                                gs.getQueenMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="K":
-                                gs.getKnightMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="G":
-                                move_cnt_w+=1
-                                gs.getKingMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1],move_cnt_w)
-                                pygame.mixer.Sound.play(step_sound2)
-                        if gs.white_to_move == False:
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="p":
-                                gs.getPawnMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="r":
-                                move_cnt_b+=1
-                                gs.getRookMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="b":
-                                gs.getBishopMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="q":
-                                gs.getQueenMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="k":
-                                gs.getKnightMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
-                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="g":
-                                move_cnt_b+=1
-                                gs.getKingMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1],move_cnt_b)
-                                pygame.mixer.Sound.play(step_sound2)
-                    else:
-                        selected = []
-                        playerClicks = []
-                if len(playerClicks) >= 2:
-                    selected = []
-                    playerClicks = []
-        for i in range(len(gs.map)):
-            for j in range(len(gs.map[i])):
-                if gs.map[i][j]=="r":
-                    display.blit(rook_b,(j*x+margin_left+24,i*x+margin_top+24))   
-                if gs.map[i][j]=="k":
-                    display.blit(knight_b,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="b":
-                    display.blit(bishop_b,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="q":
-                    display.blit(queen_b,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="g":
-                    display.blit(king_b,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="p":
-                    display.blit(pawn_b,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="R":
-                    display.blit(rook_w,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="K":
-                    display.blit(knight_w,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="B":
-                    display.blit(bishop_w,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="Q":
-                    display.blit(queen_w,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="G":
-                    display.blit(king_w,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="P":
-                    display.blit(pawn_w,(j*x+margin_left+24,i*x+margin_top+24))
-                if gs.map[i][j]=="M":
-                    display.blit(move,(j*x+22+margin_left+24,i*x+22+margin_top+24))
-                if (gs.map[i][j]=="G" or gs.map[i][j]=="g"):
-                    if gs.map[i][j]=="G":
-                        for k in range(len(gs.map)):
-                            for m in range(len(gs.map[k])):
-                                if gs.map[k][m]=="g":
-                                    Check-=1
-                                else:
-                                    Check+=1
-            
-                    elif gs.map[i][j]=="g":
-                        for k in range(len(gs.map)):
-                            for m in range(len(gs.map[k])):
-                                if gs.map[k][m]=="G":
-                                    Check2-=1
-                                else:
-                                    Check2+=1
-                if Check==81:
-                    Win()
-                else:
-                    Check=0
-                if Check2==81:
-                    Win()
-                else:
-                    Check2=0
-        keys = pygame.key.get_pressed()
+                running = False
 
-        if keys[pygame.K_ESCAPE]:
-            pause()
-        pygame.display.flip()
-        clock.tick(fps)
+            if event.type == pygame.KEYDOWN:  # Change game speed with number keys
+                if event.key == pygame.K_1:
+                    fireworks.append(Firework())
+                if event.key == pygame.K_2:
+                    for i in range(10):
+                        fireworks.append(Firework())
+        win.fill((20, 20, 30))  # draw background
+
+        if randint(0, 20) == 1:  # create new firework
+            fireworks.append(Firework())
+
+        update(win, fireworks)
+
+        # stats for fun
+        # total_particles = 0
+        # for f in fireworks:
+        #    total_particles += len(f.particles)
+
+        # print(f"Fireworks: {len(fireworks)}\nParticles: {total_particles}\n\n")
+
     pygame.quit()
-
-
+    quit()
 
 
 def print_text(message, x, y, font_color = (252, 252, 252), font_type = 'DalekPinpointBold.ttf', font_size = 25):
@@ -5837,13 +5728,6 @@ def print_text3(message, x, y, font_color = (0, 0, 0), font_type = 'DalekPinpoin
     font_type = pygame.font.Font(font_type, font_size)
     text = font_type.render(message, True, font_color)
     display.blit(text, (x, y))
-
-def Music():
-    pygame.mixer.music.play(-1)
-def Music2():
-    pygame.mixer.music.pause()
-
-
 def pause():
     paused = True
 
