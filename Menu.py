@@ -5419,43 +5419,35 @@ def Chess():
                     playerClicks.append(selected)
                 if len(playerClicks) == 1:
                     if gs.white_to_move == True:
+                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]!="" and gs.map[playerClicks[0][0]][playerClicks[0][1]].isupper(): 
+                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="P":
                             gs.getPawnWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="R":
                             gs.getRookWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="B":
                             gs.getBishopWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="Q":
                             gs.getQueenWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="K":
                             gs.getKnightWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="G":
                             gs.getKingWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                     else:
+                        if gs.map[playerClicks[0][0]][playerClicks[0][1]]!="" and gs.map[playerClicks[0][0]][playerClicks[0][1]].islower(): 
+                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="p":
                             gs.getPawnWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="r":
                             gs.getRookWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="b":
                             gs.getBishopWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="q":
                             gs.getQueenWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="k":
                             gs.getKnightWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                         if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="g":
                             gs.getKingWay(playerClicks[0][0],playerClicks[0][1])
-                            pygame.mixer.Sound.play(step_sound)
                 if len(playerClicks) == 2:
                     if gs.map[playerClicks[0][0]][playerClicks[0][1]]!="":
                         for i in range(len(gs.map)):
@@ -5463,47 +5455,39 @@ def Chess():
                                 if gs.map[i][j]=="M":
                                     gs.map[i][j]=""
                         if gs.white_to_move == True :
+                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]!="" and gs.map[playerClicks[0][0]][playerClicks[0][1]].isupper(): 
+                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="P":
                                 gs.getPawnMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="R":
                                 move_cnt_w+=1
                                 gs.getRookMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="B":
                                 gs.getBishopMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="Q":
                                 gs.getQueenMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="K":
                                 gs.getKnightMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="G":
                                 move_cnt_w+=1
                                 gs.getKingMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1],move_cnt_w)
-                                pygame.mixer.Sound.play(step_sound2)
                         if gs.white_to_move == False:
+                            if gs.map[playerClicks[0][0]][playerClicks[0][1]]!="" and gs.map[playerClicks[0][0]][playerClicks[0][1]].islower(): 
+                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="p":
                                 gs.getPawnMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="r":
                                 move_cnt_b+=1
                                 gs.getRookMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="b":
                                 gs.getBishopMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="q":
                                 gs.getQueenMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="k":
                                 gs.getKnightMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1])
-                                pygame.mixer.Sound.play(step_sound2)
                             if gs.map[playerClicks[0][0]][playerClicks[0][1]]=="g":
                                 move_cnt_b+=1
                                 gs.getKingMoves(playerClicks[0][0],playerClicks[0][1],playerClicks[1][0],playerClicks[1][1],move_cnt_b)
-                                pygame.mixer.Sound.play(step_sound2)
                     else:
                         selected = []
                         playerClicks = []
